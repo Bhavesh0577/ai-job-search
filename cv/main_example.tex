@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+% Force the name and section headings to render in moderncv blue (color1).
+% Default banking leaves them black: moderncvstylebanking.sty's \colorlet
+% copies (not aliases) the pre-scheme accent colour, so the name colours are
+% frozen before \moderncvcolor runs. Re-let them after. \namefont is the hook
+% every name-style macro routes through, so this also works on moderncv 2.3.1
+% (Debian/Ubuntu apt), which has no \firstnamestyle/\lastnamestyle at all.
+\renewcommand*{\namefont}{\fontsize{34}{36}\bfseries\upshape}
+\colorlet{firstnamecolor}{color1}
+\colorlet{lastnamecolor}{color1}
+\colorlet{namecolor}{color1}
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
+
+\usepackage[utf8]{inputenc}
+% pdflatex fallback only (the documented engine is lualatex, which skips this
+% branch). Without T1 font encoding pdflatex builds accented letters with
+% \accent, and the PDF text layer stores them decomposed - `e` + U+0300 rather
+% than U+00E8 - so an ATS keyword match on "Genève" fails while the page looks
+% right. moderncv 2.5 loads T1 itself under pdflatex; 2.3.1 (Debian/Ubuntu apt)
+% does not. \ifpdftex comes from iftex, which every moderncv version loads.
+\ifpdftex\usepackage[T1]{fontenc}\fi
+% moderncv loads hyperref itself in an \AtEndPreamble hook, so \hypersetup
+% must go in an \AtEndPreamble of our own: on moderncv < 2.4 a top-level
+% \usepackage{hyperref} clashes with the class's own
+% \RequirePackage[unicode]{hyperref}. From 2.4.0 the class passes its options
+% through \PassOptionsToPackage instead, which is what removes that clash.
+\AtEndPreamble{\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    pdftitle={[YOUR_NAME] - CV},
+    % Keep pdfpagemode=UseNone: this block runs after moderncv's own
+    % \AtEndPreamble (moderncv.cls sets pdfpagemode there), so a FullScreen
+    % value here would win and open every CV in fullscreen presentation mode.
+    pdfpagemode=UseNone,
+}}
+\usepackage[scale=0.80]{geometry}
+\usepackage{import}
+
+% Personal data
+\name{[First]}{[Last]}
+\address{[Your Address, City, Country]}{}{}
+\phone[mobile]{[+XX XXXXXXXXXX]}
+\email{[your.email@example.com]}
+\extrainfo{\href{[LINKEDIN_URL]}{LinkedIn}, \href{[GITHUB_URL]}{GitHub}}
+
+\begin{document}
+\makecvtitle
+
+\section{Profile}
+[Concise elevator pitch summarizing your technical background, domain focus, and key strengths. 3-5 sentences highlighting what you bring to the role.]
+
+\section{Core Competencies}
+\begin{itemize}
+\item \textbf{[Competency 1]}: [Brief description of skills, tools, and application]
+\item \textbf{[Competency 2]}: [Brief description of skills, tools, and application]
+\item \textbf{[Competency 3]}: [Brief description of skills, tools, and application]
+\item \textbf{[Competency 4]}: [Brief description of skills, tools, and application]
+\item \textbf{[Competency 5]}: [Brief description of skills, tools, and application]
+\end{itemize}
+
+\section{Professional Experience}
+\cventry{[YYYY-Present]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\begin{itemize}
+\item {[Key responsibility or project focus area]}
+\item {[Achievement 1: quantified result, metric, or business outcome]}
+\item {[Achievement 2: technical milestone, architecture, or performance optimization]}
+\item {[Achievement 3: cross-functional collaboration or leadership contribution]}
+\end{itemize}
+}
+\vspace{3pt}
+\cventry{[YYYY-YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\begin{itemize}
+\item {[Key responsibility or project focus area]}
+\item {[Achievement 1: quantified result, metric, or business outcome]}
+\item {[Achievement 2: technical milestone, architecture, or performance optimization]}
+\item {[Achievement 3: tooling, automation, or efficiency improvement]}
+\end{itemize}
+}
+\vspace{3pt}
+\cventry{[YYYY-YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\begin{itemize}
+\item {[Key responsibility or project focus area]}
+\item {[Achievement 1: quantified result, metric, or business outcome]}
+\item {[Achievement 2: technical milestone, architecture, or performance optimization]}
+\end{itemize}
+}
+
+\section{Education}
+\cventry{[YYYY-YYYY]}{[Degree Level] in [Field of Study]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
+[Grade / Honors / Thesis topic if applicable. Relevant coursework and academic projects.]
+}
+\vspace{3pt}
+\cventry{[YYYY-YYYY]}{[Degree Level] in [Field of Study]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
+[Grade / Honors / Thesis topic if applicable. Relevant coursework and academic projects.]
+}
+
+\section{Honors and Awards}
+\begin{itemize}
+\item \textbf{[Award or Recognition 1]} -- [Issuing Organization or Event, Year]
+\item \textbf{[Award or Recognition 2]} -- [Issuing Organization or Event, Year]
+\end{itemize}
+
+\section{References}
+\cventry{}{Available upon request.}{}{}{}{}
+
+\end{document}
